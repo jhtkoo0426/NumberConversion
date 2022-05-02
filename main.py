@@ -14,7 +14,8 @@ class NumberConverter:
     def toDigits(self, n):
         digits = []
         while n > 0:
-            digits.insert(0, n % self.targetBase)
+            mod = self.valToHex(n % self.targetBase)
+            digits.insert(0, mod)
             n = n // self.targetBase
         return digits
 
@@ -23,14 +24,18 @@ class NumberConverter:
         n = 0
         digits = list(digits)
         for d in digits:
-            d = self.hex(d)
+            d = self.hexToVal(d)
             n = self.initialBase * n + int(d)
         return n
 
-    # Determines if an integer "a" is in hexadecimal (A-F).
-    def hex(self, a):
+    # Converts a hexadecimal number (A-F) to its corresponding numeric value.
+    def hexToVal(self, a):
         hex_vals = ["A", "B", "C", "D", "E", "F"]
         return 10 + hex_vals.index(a) if a in hex_vals else a
+
+    def valToHex(self, a):
+        hex_vals = ["A", "B", "C", "D", "E", "F"]
+        return hex_vals[a-10] if a > 10 else a
 
     def convertBase(self):
         result = ''.join(str(i) for i in self.toDigits(self.fromDigits(self.val)))
@@ -38,5 +43,5 @@ class NumberConverter:
         print(f"Result number in base {self.targetBase}: {result}")
 
 
-converter = NumberConverter("10FFFF", 16, 10)
+converter = NumberConverter("EA2DFF", 16, 10)
 converter.convertBase()
