@@ -23,8 +23,14 @@ class NumberConverter:
         n = 0
         digits = list(digits)
         for d in digits:
+            d = self.hex(d)
             n = self.initialBase * n + int(d)
         return n
+
+    # Determines if an integer "a" is in hexadecimal (A-F).
+    def hex(self, a):
+        hex_vals = ["A", "B", "C", "D", "E", "F"]
+        return 10 + hex_vals.index(a) if a in hex_vals else a
 
     def convertBase(self):
         result = ''.join(str(i) for i in self.toDigits(self.fromDigits(self.val)))
@@ -32,5 +38,5 @@ class NumberConverter:
         print(f"Result number in base {self.targetBase}: {result}")
 
 
-converter = NumberConverter("22", 16, 2)
+converter = NumberConverter("10FFFF", 16, 10)
 converter.convertBase()
