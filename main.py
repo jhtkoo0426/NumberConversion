@@ -35,7 +35,7 @@ class NumberConverter:
 
     def valToHex(self, a):
         hex_vals = ["A", "B", "C", "D", "E", "F"]
-        return hex_vals[a-10] if a > 10 else a
+        return hex_vals[a-10] if a > 9 else a
 
     def convertBase(self):
         result = ''.join(str(i) for i in self.toDigits(self.fromDigits(self.val)))
@@ -43,5 +43,5 @@ class NumberConverter:
         print(f"Result number in base {self.targetBase}: {result}")
 
 
-converter = NumberConverter("EA2DFF", 16, 10)
+converter = NumberConverter("4005", 10, 16)
 converter.convertBase()
